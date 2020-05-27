@@ -17,7 +17,7 @@ and it will get the list from the file "tor_exit_nodes.list" if exists.
 
 ## Output
 
-![Results](https://github.com/salehmuhaysin/TorDetector/blob/master/Selection_336.png?raw=true)
+![Results](https://github.com/salehmuhaysin/TorDetector/blob/master/Selection_010.png	?raw=true)
 
 
 ## Requirements
