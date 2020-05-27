@@ -15,6 +15,10 @@ If you keep trying to download this list too often, you may get blocked from acc
 ```
 and it will get the list from the file "tor_exit_nodes.list" if exists.
 
+## Output
+
+![Results](https://github.com/salehmuhaysin/TorDetector/blob/master/Selection_336.png?raw=true)
+
 
 ## Requirements
 ```
