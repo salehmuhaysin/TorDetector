@@ -5,7 +5,7 @@ This script accept a text file and collect any IP address (based on its format x
 Provide the log file to the script as argument, the script will fetch the Tor exit node IP addresses from "https://www.dan.me.uk/torlist/" and store it in "tor_exit_nodes.list" file, you can provide a folder path and it will check all log files inside it
 
 ```                  
-python TorDetector.py <log-file>
+python TorDetector.py (<logs-folder>|<log-file>)
 ```
 Note: the webside "https://www.dan.me.uk/torlist/" only allow to fetch the database every 30mins, if you try to run the script again it will print the message
 ```
