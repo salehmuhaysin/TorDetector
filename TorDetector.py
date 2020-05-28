@@ -100,11 +100,14 @@ def GetLogIP(log):
 
 # this will execute the code for each specific file of log
 def main(log , exit_node ):
-	if not FetchExitNodes(exit_node_uri , exit_node):
-		if os.path.exists(exit_node):
-			print "[+] file ["+exit_node+"] exists, will used old tor exit not list"
-		else:
-			return []
+	if exit_node_uri != "":
+		FetchExitNodes(exit_node_uri , exit_node)
+		
+	if os.path.exists(exit_node):
+		print "[+] file ["+exit_node+"] exists, will used old tor exit node list"
+	else:
+		return []
+		
 	exit_nodes_list = GetExitNodes(exit_node)
 	iplist 		= GetLogIP(log)
 	hits 		= GetMatch(iplist , exit_nodes_list)
