@@ -11,9 +11,11 @@ from validators import ip_address
 import sys
 import re 
 import os
+import ssl
+ssl.HAS_SNI = False
 import requests
 
-print """                           
+print( """                           
                         *
                     _:*///:_                     
                 _+*///////////+_                
@@ -32,18 +34,18 @@ print """
     *////////********************************     
      */////  github.com/salehmuhaysin  *****      
       *///*********************************             
-=========================================================="""
+==========================================================""")
 
 
 # check if the arguments has the element <log-file> 
 if len(sys.argv) != 2:
-	print "[-] Error: you have to provide all the arguments: python TorDetector.py (<logs-folder>|<log-file>)"
+	print ("[-] Error: you have to provide all the arguments: python TorDetector.py (<logs-folder>|<log-file>)")
 	sys.exit()
 
 
 log = sys.argv[1]
 exit_node = "tor_exit_nodes.list"
-exit_node_uri = "https://www.dan.me.uk/torlist/"
+exit_node_uri = "https://check.torproject.org/torbulkexitlist"
 
 
 # check if any ip address in the log match any exit node ip address
@@ -52,7 +54,7 @@ def GetMatch(iplist , exit_nodes_list):
 	
 	for i in iplist:
 		if i in exit_nodes_list and ip_address.ipv4( i ):
-			print "[+] Hit: The IP [" + i + "] is an exit node"
+			print ("[+] Hit: The IP [" + i + "] is an exit node")
 			hits.append( i )	
 	return hits
 
@@ -65,8 +67,8 @@ def FetchExitNodes(uri , exit_node):
 		f.close()
 		return True
 	else:
-		print "[-] Failed to fetch the exit nodes"
-		print "[-] Message: " + r.content
+		print ("[-] Failed to fetch the exit nodes")
+		print ("[-] Message: " + str(r.content))
 		return False
 
 # get the list of all exit node ip addresses
@@ -104,7 +106,7 @@ def main(log , exit_node ):
 		FetchExitNodes(exit_node_uri , exit_node)
 		
 	if os.path.exists(exit_node):
-		print "[+] file ["+exit_node+"] exists, will used old tor exit node list"
+		print ("[+] file ["+ str(exit_node)+"] exists, will used old tor exit node list")
 	else:
 		return []
 		
@@ -115,7 +117,7 @@ def main(log , exit_node ):
 	# get all results
 	result = []
 	for i in hits:
-		result.append( str("[+] Hit: The IP [" + i + "] is an exit node, from file: " + log) ) 
+		result.append( str("[+] Hit: The IP [" + i + "] is an exit node, from file: " + str(log)) ) 
 
 	return result
 
@@ -130,14 +132,14 @@ elif os.path.isdir(log):
 
 res = []
 for logfile in loglist:
-	print "[+] Checking the file: " + logfile
+	print ("[+] Checking the file: " + str(logfile))
 	for m in main(logfile, exit_node):
 		res.append( m )
 
 
-print "[+] Number of hits " + str(len(res))
+print ("[+] Number of hits " + str(len(res)))
 for r in res:
-	print r
+	print (r)
 
 
 
